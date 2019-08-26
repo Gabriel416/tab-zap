@@ -19,7 +19,7 @@ function App() {
 
   const renderView = view => {
     switch (view) {
-      case "sessionLists":
+      case "sessionList":
         return <SessionList sessions={sessions} />;
       case "saveSession":
         return <SaveSession onSubmit={saveSession} />;
