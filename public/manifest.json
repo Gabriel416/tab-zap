@@ -1,0 +1,19 @@
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "version": "0.1",
+  "icons": {
+    "128": "favicon.ico",
+    "16": "logo192.png",
+    "48": "logo512.png"
+  },
+  "permissions": ["tabs", "declarativeContent", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+}
