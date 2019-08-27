@@ -20,11 +20,8 @@ class SaveSession extends Component {
       return;
     }
 
-    // Call cb with name here with tabs list
-
-    console.log(e, "e");
     chrome.tabs.getAllInWindow(null, tabs => {
-      this.props.onSubmit({ name: this.state.name, tabs });
+      this.props.onSubmit({ name: this.state.name, showTabs: false, tabs });
     });
   };
 

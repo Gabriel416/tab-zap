@@ -1,6 +1,6 @@
 /*global chrome*/
 import React, { useState, useEffect } from "react";
-import { saveChanges, fetchSessions } from "./utils/";
+import { saveChanges, fetchSessions, updateSessions } from "./utils/";
 import "./App.scss";
 
 import SaveSession from "./components/SaveSession";
@@ -20,7 +20,12 @@ function App() {
   const renderView = view => {
     switch (view) {
       case "sessionList":
-        return <SessionList sessions={sessions} />;
+        return (
+          <SessionList
+            sessions={sessions}
+            updateSessionData={updateSessionData}
+          />
+        );
       case "saveSession":
         return <SaveSession onSubmit={saveSession} />;
       default:
@@ -31,6 +36,12 @@ function App() {
   const saveSession = session => {
     setButtonText("Save Current Tabs");
     saveChanges(session);
+  };
+
+  const updateSessionData = sessions => {
+    console.log("HIT");
+    updateSessions(sessions);
+    setSessions(fetchSessions());
   };
 
   return (
