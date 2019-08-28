@@ -1,7 +1,6 @@
 /*global chrome*/
 import React, { Component } from "react";
 import classnames from "classnames";
-import { ninvoke } from "q";
 
 class SaveSession extends Component {
   constructor(props) {
