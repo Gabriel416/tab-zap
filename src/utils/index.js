@@ -1,23 +1,23 @@
 /*global chrome*/
 const SESSIONS = "SESSIONS";
 
-export const saveChanges = session => {
-  const sessions = fetchSessions();
-  if (sessions) {
-    localStorage.setItem(SESSIONS, JSON.stringify([...sessions, session]));
-  } else {
-    localStorage.setItem(SESSIONS, JSON.stringify([session]));
-  }
+export const saveChanges = async session => {
+  const sessions = await fetchSessions();
+  sessions.length
+    ? chrome.storage.local.set({ SESSIONS: [...sessions, session] })
+    : chrome.storage.local.set({ SESSIONS: [session] });
 };
 
 export const fetchSessions = () => {
-  return JSON.parse(localStorage.getItem(SESSIONS)) || [];
+  return new Promise(resolve => {
+    chrome.storage.local.get([SESSIONS], data => {
+      resolve(Object.keys(data).length ? data.SESSIONS : []);
+    });
+  });
 };
 
 export const updateSessions = updatedSessions => {
-  console.log(updatedSessions, "updateSessio");
-  localStorage.setItem(SESSIONS, JSON.stringify(updatedSessions));
-  console.log(fetchSessions(), "lastest");
+  chrome.storage.local.set({ SESSIONS: updatedSessions });
 };
 
 export const validURL = str => {

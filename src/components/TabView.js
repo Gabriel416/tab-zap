@@ -3,8 +3,13 @@ import React from "react";
 
 const TabView = ({ sessionIndex, tabs, handleTabDelete }) => {
   const handleFaviconErr = e => {
-    e.target.src = "chrome://favicon/chrome://newtab/";
-    // e.target.style.opacity = 0;
+    e.target.style.opacity = 0;
+  };
+
+  const checkForFaviconUrl = favIconUrl => {
+    return !favIconUrl
+      ? `${process.env.PUBLIC_URL}/default-favicon.png`
+      : favIconUrl;
   };
 
   const openNewTab = (e, url) => {
@@ -25,7 +30,7 @@ const TabView = ({ sessionIndex, tabs, handleTabDelete }) => {
           >
             <img
               onError={e => handleFaviconErr(e)}
-              src={favIconUrl}
+              src={checkForFaviconUrl(favIconUrl)}
               alt="tab favicon"
             />
             <p>{title}</p>

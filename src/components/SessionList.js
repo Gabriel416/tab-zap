@@ -65,6 +65,10 @@ class SessionList extends Component {
     );
   };
 
+  openSession = tabs => {
+    chrome.windows.create({ url: tabs.map(tab => tab.url) });
+  };
+
   displaySessionList = sessions => {
     const { addTab } = this.state;
     return sessions.map(({ name, showTabs, tabs }, i) => {
@@ -86,6 +90,12 @@ class SessionList extends Component {
               </p>
             </div>
             <div className="session-actions">
+              <span
+                onClick={() => this.openSession(tabs)}
+                className="open-session"
+              >
+                Open Session
+              </span>
               <i
                 onClick={() => this.handleSessionDelete(i)}
                 className="fa fa-trash"
